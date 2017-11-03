@@ -185,9 +185,10 @@ Widget.prototype = {
     this.rsChooseRemoteStorageButton = document.querySelector('button.rs-choose-rs');
     this.rsChooseDropboxButton = document.querySelector('button.rs-choose-dropbox');
     this.rsChooseGoogleDriveButton = document.querySelector('button.rs-choose-googledrive');
-    this.rsErrorBox = document.querySelector('.rs-box-error .rs-error-message');
+    this.rsChooseSafeNetworkButton = document.querySelector('button.rs-choose-safenetwork');
+this.rsErrorBox = document.querySelector('.rs-box-error .rs-error-message');
 
-    // check if apiKeys is set for Dropbox or Google [googledrive, dropbox]
+    // check if apiKeys is set for Dropbox, GoogleDrive or SafeNetwork [dropbox, googledrive, safenetwork]
     // to show/hide relative buttons only if needed
     if (! this.rs.apiKeys.hasOwnProperty('googledrive')) {
       this.rsChooseGoogleDriveButton.parentNode.removeChild(this.rsChooseGoogleDriveButton);
@@ -195,6 +196,10 @@ Widget.prototype = {
 
     if (! this.rs.apiKeys.hasOwnProperty('dropbox')) {
       this.rsChooseDropboxButton.parentNode.removeChild(this.rsChooseDropboxButton);
+    }
+
+    if (! this.rs.apiKeys.hasOwnProperty('safenetwork')) {
+      this.rsChooseSafeNetworkButton.parentNode.removeChild(this.rsChooseSafeNetworkButton);
     }
 
     this.rsSignInForm = document.querySelector('.rs-sign-in-form');
@@ -289,6 +294,9 @@ Widget.prototype = {
     // Choose Google Drive button
     this.rsChooseGoogleDriveButton.addEventListener('click', () => this.rs["googledrive"].connect() );
 
+    // Choose SafeNetwork button
+    this.rsChooseSafeNetworkButton.addEventListener('click', () => this.rs["safenetwork"].connect() );
+
     // Disconnect button
     this.rsDisconnectButton.addEventListener('click', () => this.rs.disconnect() );
 
@@ -375,6 +383,7 @@ Widget.prototype = {
     this.rsWidget.classList.remove('rs-backend-remotestorage');
     this.rsWidget.classList.remove('rs-backend-dropbox');
     this.rsWidget.classList.remove('rs-backend-googledrive');
+    this.rsWidget.classList.remove('rs-backend-safenetwork');
 
     if (backend) {
       this.rsWidget.classList.add(`rs-backend-${backend}`);

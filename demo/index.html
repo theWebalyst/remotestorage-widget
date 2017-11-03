@@ -23,6 +23,23 @@
       dropbox: '6sa61p53d6qa88q',
       googledrive: '626692989184-4qj0epv5gcra69l8kvv3aj6nnahq7rrk.apps.googleusercontent.com'
     });
+    // mrhTODO - review...
+    // SAFE Network backend requires application identity and required permissions rather than
+    // API keys (authentication is handled by the user via SAFE Launcher, not a server)
+    remoteStorage.setApiKeys({
+      safenetwork:
+    		{
+                // For details see SAFE Launcher /auth JSON API
+    			app: {
+    			    name: 'RemoteStorage Demo',		// Your app name etc.
+    			    version: '0.0.1',
+    			    vendor: 'remoteStorage',
+    			    id: 'org.remotestorage.rsdemo',      // Identifies stored data (unique per vendor)
+    		        permissions: ['SAFE_DRIVE_ACCESS']   // List of permissions to request. On authorisation,
+    			},
+    												// holds permissions granted by user
+        }
+      });
 
     remoteStorage.access.claim('bookmarks', 'rw');
     remoteStorage.caching.enable('/bookmarks/');
